@@ -1,10 +1,15 @@
+
 / to create .so file that can be imported to python from c
 / - using ctypes inbuilt python fucntion
-gcc -shared -Wl,-soname,adder -o adder.so -fPIC add.c
+>>> gcc -shared -Wl,-soname,adder -o adder.so -fPIC add.c
+
+//or just
+>>> gcc -shared -o libhello.so -fPIC hello.c
+
 
 // for python imported  
-from ctypes import CDLL
+>>> from ctypes import CDLL
 #load the shared object file
-variable = CDLL('./output.so')
+>>> variable = CDLL('./output.so')
 
-whatever = variable.function()
+>>> whatever = variable.function()
