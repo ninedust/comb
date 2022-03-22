@@ -9,6 +9,5 @@ int game_start_fuc(void)
 
 int main(void)
 {
-
     game_start_fuc();
 }
