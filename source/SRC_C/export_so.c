@@ -17,12 +17,14 @@ int main(void)
     if (d)
     {
         int index = 0;
-        char allfiles[100];
+        char allfiles[10][100];
         while ((dir = readdir(d)) != NULL)
         {
-            printf("%s\n", dir->d_name);
+            // strcpy is imported from string.h which copies the string to array from given char
+            strcpy(allfiles[index++], dir->d_name);
         }
         closedir(d);
     }
+
     return (0);
 }
