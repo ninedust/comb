@@ -22,8 +22,17 @@ int main(void)
         {
             // strcpy is imported from string.h which copies the string to array from given char
             strcpy(allfiles[index++], dir->d_name);
+            // printf("%s\n", dir->d_name);
         }
         closedir(d);
+
+        for (size_t i = 0; i < 6; i++)
+        {
+            if (strcmp(allfiles[i], "export_so.c") != 0)
+            {
+                printf("%s\n", allfiles[i]);
+            }
+        }
     }
 
     return (0);
