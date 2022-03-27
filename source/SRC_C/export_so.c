@@ -20,17 +20,33 @@ int main(void)
         char allfiles[10][100];
         while ((dir = readdir(d)) != NULL)
         {
-            // strcpy is imported from string.h which copies the string to array from given char
             strcpy(allfiles[index++], dir->d_name);
-            // printf("%s\n", dir->d_name);
         }
         closedir(d);
 
         for (size_t i = 0; i < 6; i++)
         {
-            if (strcmp(allfiles[i], "export_so.c") != 0)
+            if (allfiles[i])
             {
-                printf("%s\n", allfiles[i]);
+                char eachfiles[100];
+                strcpy(eachfiles, allfiles[i]);
+
+                if (strcmp(eachfiles, __FILE__) != 0 &&
+                    eachfiles[strlen(eachfiles) - 1] == 'c' &&
+                    eachfiles[strlen(eachfiles) - 2] == '.')
+                {
+                    char cmd[150];
+                    char eachfilewithoutext[100];
+                    strcpy(eachfilewithoutext, eachfiles);
+                    eachfilewithoutext[strlen(eachfilewithoutext) - 1] = '\0';
+                    eachfilewithoutext[strlen(eachfilewithoutext) - 1] = '\0';
+                    strcpy(cmd, "gcc -shared -o ../global/");
+                    strcat(cmd, eachfilewithoutext);
+                    strcat(cmd, ".so -fPIC ");
+                    strcat(cmd, eachfiles);
+
+                    system(cmd);
+                }
             }
         }
     }
